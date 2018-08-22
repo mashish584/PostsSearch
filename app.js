@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
+const { getData } = require("./app_functions");
 
 require("dotenv").config({ path: "secret.env" });
 
@@ -21,6 +22,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // use static files
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res, next) => {
+    getData()
+        .then(response => {
+            console.log(response);
+        })
+        .catch(err => next(err));
+});
+
 app.get("/search", (req, res) => {
     res.render("index", { title: "Post Search" });
 });
@@ -31,7 +40,7 @@ app.use((req, res, next) => {
     next(error);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
     res.send(`${err.message} ${[err.status]}`);
 });
 
