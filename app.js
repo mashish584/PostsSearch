@@ -3,6 +3,15 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const { getData } = require("./app_functions");
+const { esClient } = require("./es-server");
+
+esClient.ping({ requestTimeout: 15000 }, err => {
+	if (err) {
+		console.error(err);
+	} else {
+		console.log("Ready to go..!");
+	}
+});
 
 require("dotenv").config({ path: "secret.env" });
 
@@ -23,33 +32,31 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res, next) => {
-    getData()
-        .then(response => {
-            console.log(response);
-        })
-        .catch(err => next(err));
+	getData()
+		.then(response => {
+			console.log(response);
+		})
+		.catch(err => next(err));
 });
 
 app.get("/search", (req, res) => {
-    res.render("index", { title: "Post Search" });
+	res.render("index", { title: "Post Search" });
 });
 
 app.use((req, res, next) => {
-    const error = new Error("NOT FOUND");
-    error.status = 404;
-    next(error);
+	const error = new Error("NOT FOUND");
+	error.status = 404;
+	next(error);
 });
 
 app.use((err, req, res) => {
-    res.send(`${err.message} ${[err.status]}`);
+	res.send(`${err.message} ${[err.status]}`);
 });
 
 //setting port
 app.set("port", process.env.PORT || 4000);
 
 app.listen(app.get("port"), err => {
-    const message = err
-        ? "Problem while running the application server"
-        : `Server is running on port ${app.get("port")}`;
-    console.log(message);
+	const message = err ? "Problem while running the application server" : `Server is running on port ${app.get("port")}`;
+	console.log(message);
 });
