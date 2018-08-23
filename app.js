@@ -48,6 +48,7 @@ app.get("/", (req, res, next) => {
 				//adding data
 				body.push(post);
 			});
+			res.json(body);
 		})
 		.catch(err => next(err));
 });
