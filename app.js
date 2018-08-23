@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const { getData } = require("./app_functions");
-const { esClient } = require("./es-server");
+const { esClient, loadData } = require("./es-server");
 
 esClient.ping({ requestTimeout: 15000 }, err => {
 	if (err) {
@@ -48,7 +48,8 @@ app.get("/", (req, res, next) => {
 				//adding data
 				body.push(post);
 			});
-			res.json(body);
+			//index all data of body
+			loadData(body);
 		})
 		.catch(err => next(err));
 });
