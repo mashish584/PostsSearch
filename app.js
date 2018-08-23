@@ -34,7 +34,20 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res, next) => {
 	getData()
 		.then(response => {
-			console.log(response);
+			const data = response;
+			let body = [];
+			data.map(post => {
+				//creating index for each set of data
+				body.push({
+					index: {
+						_index: "blogs",
+						_type: "comment",
+						_id: post.id
+					}
+				});
+				//adding data
+				body.push(post);
+			});
 		})
 		.catch(err => next(err));
 });
