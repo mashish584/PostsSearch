@@ -8,10 +8,9 @@ html(lang='en')
     link(rel='stylesheet', href='/css/main.css')
   body
     #wrapper
-      input(type="search" name="search" placeholder="Enter keyword to search")
+      input(type="search" id="search" name="search" placeholder="Enter keyword to search")
       span Data fetching from jsonplaceholder open #[a( href='http://google.com' target="_blank" ) api]. Check console for logs.
     #search-result
-      div
-        | "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium" <br/> -by ('abc@example.com')
 
-
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js")
+    script(src="js/main.js")

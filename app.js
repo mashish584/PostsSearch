@@ -3,7 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const { getData } = require("./app_functions");
-const { esClient, loadData } = require("./es-server");
+const { esClient, loadData, searchWithPostNameAndBody } = require("./es-server");
 
 esClient.ping({ requestTimeout: 15000 }, err => {
 	if (err) {
@@ -54,8 +54,26 @@ app.get("/", (req, res, next) => {
 		.catch(err => next(err));
 });
 
-app.get("/search", (req, res) => {
+app.get("/search", async (req, res) => {
 	res.render("index", { title: "Post Search" });
+});
+
+app.get("/api/search", async (req, res) => {
+	const body = {
+		size: 5,
+		from: 0,
+		query: {
+			multi_match: {
+				query: req.query.q,
+				fields: ["name", "body"],
+				minimum_should_match: 3
+				// fuzziness: 2
+			}
+		}
+	};
+
+	let data = await searchWithPostNameAndBody(body);
+	return res.json(data);
 });
 
 app.use((req, res, next) => {

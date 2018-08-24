@@ -19,4 +19,16 @@ const loadData = body => {
 	});
 };
 
-module.exports = { esClient, loadData };
+const searchWithPostNameAndBody = async body => {
+	// console.log("HEY");
+	let response = await esClient.search({ index: "blogs", type: "comment", body });
+	// console.log(`${response.took}ms taken for search.`);
+	// console.log(response);
+	return response.hits.hits;
+};
+
+module.exports = {
+	esClient,
+	loadData,
+	searchWithPostNameAndBody
+};

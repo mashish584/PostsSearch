@@ -1,53 +1,54 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
-    background: #f5f5f5;
+	background: #f5f5f5;
 }
 
 a {
-    text-decoration: none;
-    background: #dcdcdc;
-    color: #222;
-    font-weight: 800;
-    padding: 2px 5px;
+	text-decoration: none;
+	background: #dcdcdc;
+	color: #222;
+	font-weight: 800;
+	padding: 2px 5px;
 }
 
 #wrapper,
 #search-result {
-    width: 300px;
-    margin: 50px auto 0;
+	width: 300px;
+	margin: 50px auto 0;
 }
 
 #search-result {
-    margin-top: 15px;
+	margin-top: 15px;
 }
 
-input {
-    width: 100%;
-    padding: 5px;
-    height: 30px;
-    border: 2px solid #dcdcdc;
+input,
+button {
+	width: 100%;
+	padding: 5px;
+	height: 30px;
+	border: 2px solid #dcdcdc;
 }
 
 span {
-    display: block;
-    margin-top: 15px;
-    text-transform: uppercase;
-    font-size: 10px;
-    font-family: "Courier New", Courier, monospace;
+	display: block;
+	margin-top: 15px;
+	text-transform: uppercase;
+	font-size: 10px;
+	font-family: "Courier New", Courier, monospace;
 }
 
 #search-result div {
-    background: #fff;
-    padding: 10px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-    font-size: 10px;
-    color: #a9a9a9;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
-    margin: 5px 0;
+	background: #fff;
+	padding: 10px;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 500;
+	font-size: 10px;
+	color: #a9a9a9;
+	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+	margin: 5px 0;
 }
